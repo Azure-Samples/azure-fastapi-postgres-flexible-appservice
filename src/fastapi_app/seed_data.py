@@ -34,9 +34,7 @@ def load_from_json():
 
                     for destination in entry["fields"]["destinations"]:
                         destination = session.exec(
-                            select(models.Destination).where(
-                                models.Destination.id == destination
-                            )
+                            select(models.Destination).where(models.Destination.id == destination)
                         )
                         destinations.append(destination.first())
 
