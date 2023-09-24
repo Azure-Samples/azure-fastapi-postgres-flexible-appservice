@@ -30,29 +30,21 @@ def about(request: Request):
 def destinations(request: Request):
     with Session(engine) as session:
         all_destinations = session.exec(select(Destination)).all()
-    return templates.TemplateResponse(
-        "destinations.html", {"request": request, "destinations": all_destinations}
-    )
+    return templates.TemplateResponse("destinations.html", {"request": request, "destinations": all_destinations})
 
 
 @app.get("/destination/{pk}", response_class=HTMLResponse)
 def destination_detail(request: Request, pk: int):
     with Session(engine) as session:
-        destination = session.exec(
-            select(Destination).where(Destination.id == pk)
-        ).first()
-        return templates.TemplateResponse(
-            "destination_detail.html", {"request": request, "destination": destination}
-        )
+        destination = session.exec(select(Destination).where(Destination.id == pk)).first()
+        return templates.TemplateResponse("destination_detail.html", {"request": request, "destination": destination})
 
 
 @app.get("/cruise/{pk}")
 def cruise_detail(request: Request, pk: int):
     with Session(engine) as session:
         cruise = session.exec(select(Cruise).where(Cruise.id == pk)).first()
-        return templates.TemplateResponse(
-            "cruise_detail.html", {"request": request, "cruise": cruise}
-        )
+        return templates.TemplateResponse("cruise_detail.html", {"request": request, "cruise": cruise})
 
 
 @app.get("/info_request/", response_class=HTMLResponse)
