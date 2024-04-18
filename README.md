@@ -17,7 +17,7 @@ description: This project deploys a web application for a space travel agency us
 ---
 <!-- YAML front-matter schema: https://review.learn.microsoft.com/en-us/help/contribute/samples/process/onboarding?branch=main#supported-metadata-fields-for-readmemd -->
 
-# Deploy FastAPI Application with PostgreSQL via Azure Container Apps
+# Deploy FastAPI Application with PostgreSQL via Azure App Service
 
 This project deploys a web application for a space travel agency using FastAPI. The application can be deployed to Azure with Azure App Service using the [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/overview).
 
@@ -70,14 +70,14 @@ python3 -m uvicorn fastapi_app:app --reload --port=8000
 
 ## Running tests
 
-2. Install the development requirements:
+1. Install the development requirements:
 
     ```sh
     python3 -m pip install -r requirements-dev.txt
     python3 -m playwright install chromium --with-deps
     ```
 
-3. Run the tests:
+2. Run the tests:
 
     ```sh
     python3 -m pytest
