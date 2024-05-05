@@ -69,7 +69,7 @@ module web 'web.bicep' = {
   name: 'web'
   scope: resourceGroup
   params: {
-    name: replace('${take(prefix, 19)}-appsvc', '--', '-')
+    name: replace('${take(prefix,19)}-appsvc', '--', '-')
     location: location
     tags: tags
     applicationInsightsName: monitoring.outputs.applicationInsightsName
@@ -90,15 +90,17 @@ var secrets = [
 ]
 
 @batchSize(1)
-module keyVaultSecrets './core/security/keyvault-secret.bicep' = [for secret in secrets: {
-  name: 'keyvault-secret-${secret.name}'
-  scope: resourceGroup
-  params: {
-    keyVaultName: keyVault.outputs.name
-    name: secret.name
-    secretValue: secret.value
+module keyVaultSecrets './core/security/keyvault-secret.bicep' = [
+  for secret in secrets: {
+    name: 'keyvault-secret-${secret.name}'
+    scope: resourceGroup
+    params: {
+      keyVaultName: keyVault.outputs.name
+      name: secret.name
+      secretValue: secret.value
+    }
   }
-}]
+]
 
 output AZURE_LOCATION string = location
 output AZURE_KEY_VAULT_ENDPOINT string = keyVault.outputs.endpoint
